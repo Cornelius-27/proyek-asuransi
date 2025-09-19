@@ -494,3 +494,25 @@ nav ul a {
         padding: 0.8em 0.7em;
     }
 }
+/*desain yang responsif*/
+
+@media (max-width: 768px) {
+    
+    nav ul {
+        display: none; 
+    }
+
+    .products, .produk-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr; 
+    }
+
+    .footer-top, .footer-bottom {
+        flex-direction: column; 
+        text-align: center;
+        gap: 20px;
+    }
+}
