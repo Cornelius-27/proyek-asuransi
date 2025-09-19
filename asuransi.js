@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Sign Up Form: Menyimpan data ke localStorage
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
         signupForm.addEventListener('submit', (e) => {
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Login Form: Memeriksa data dari localStorage
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
@@ -52,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // BAGIAN PERHITUNGAN PREMI ASURANSI
-    // --- Perhitungan Asuransi Mobil ---
     const carInsuranceForm = document.getElementById('carInsuranceForm');
     if (carInsuranceForm) {
         carInsuranceForm.addEventListener('submit', (e) => {
@@ -89,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Perhitungan Asuransi Kesehatan ---
     const healthInsuranceForm = document.getElementById('healthInsuranceForm');
     if (healthInsuranceForm) {
         healthInsuranceForm.addEventListener('submit', (e) => {
@@ -107,8 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (age > 20 && age <= 35) ageMultiplier = 0.2;
             else if (age > 35 && age <= 50) ageMultiplier = 0.25;
             else if (age > 50) ageMultiplier = 0.4;
-
-            // Rumus: Premi = P + (m*P) + (k1*0.5*P) + (k2*0.4*P) + (k3*0.5*P)
             const premium = basePremium + (ageMultiplier * basePremium) + (isSmoker * 0.5 * basePremium) + (hasHypertension * 0.4 * basePremium) + (hasDiabetes * 0.5 * basePremium);
             
             document.getElementById('healthPremiumAmount').textContent = `Rp ${premium.toLocaleString('id-ID')}`;
@@ -116,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Perhitungan Asuransi Jiwa ---
     const lifeInsuranceForm = document.getElementById('lifeInsuranceForm');
     if (lifeInsuranceForm) {
         lifeInsuranceForm.addEventListener('submit', (e) => {
@@ -132,14 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (age > 30 && age <= 50) premiumRate = 0.004; 
             else if (age > 50) premiumRate = 0.01; 
 
-            // Rumus: Premi = Faktor Premi * Uang Pertanggungan
             const premium = premiumRate * coverage;
             document.getElementById('lifePremiumAmount').textContent = `Rp ${premium.toLocaleString('id-ID')}`;
             document.getElementById('lifePremiumResult').style.display = 'block';
         });
     }
 
-    // Auth Buttons: Menampilkan tombol Logout jika sudah login
     const authButtons = document.getElementById('auth-buttons');
     const isLoggedIn = localStorage.getItem('isLoggedIn');
 

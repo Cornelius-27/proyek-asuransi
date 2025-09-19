@@ -181,7 +181,7 @@ nav ul a {
 }
 
 .form-wrapper {
-    background-color: #ffffff;
+    background-color: hsl(0, 0%, 100%);
     padding: 2.5em;
     border-radius: 15px; 
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); 
@@ -268,7 +268,6 @@ nav ul a {
 
 .footer-main {
     display: grid;
-    /* Membuat 5 kolom di layar besar, dan akan otomatis turun di layar kecil */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
 }
@@ -335,7 +334,7 @@ nav ul a {
     background-image: url('images/asuransi kesehatan.jpg');
     background-size: cover;
     background-position: center;
-    color: #fff;
+    color: #ffffff;
 }
 .product-card-mobil {
     background-image: url('images/asuransi mobil.jpg');
@@ -350,7 +349,6 @@ nav ul a {
     color: #fff;
 }
 
-/* Checkout Page Styling */
 .checkout-container {
     max-width: 420px;
     margin: 40px auto;
