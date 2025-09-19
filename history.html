@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riwayat Pembelian Asuransi</title>
+    <link rel="stylesheet" href="asuransi.css">
+</head>
+<body>
+       <header>
+        <nav>
+            <div class="logo">SIGURIMI</div>
+            <ul>
+                <li><a href="asuransi.html">HomePage</a></li>
+                <li><a href="#">Produk</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <a href="asuransi.html" class="btn btn-secondary" style="margin-bottom: 20px; display: inline-block;">← Kembali ke Homepage</a>
+        <div class="history-outer">
+            <div class="history-container">
+                <h2>Riwayat Pembelian Asuransi</h2>
+                <div class="history-list" id="history-list">
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="history.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+        window.location.href = 'login.html';
+    }
+});
+</script>
+</body>
+</html>

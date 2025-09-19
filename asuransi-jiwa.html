@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asuransi Jiwa - SIGURIMI</title>
+    <link rel="stylesheet" href="asuransi.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">SIGURIMI</div>
+            <ul>
+                <li><a href="asuransi.html">HomePage</a></li>
+                <li><a href="#">Produk</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <a href="asuransi.html" class="btn btn-secondary" style="margin-bottom: 20px; display: inline-block;">← Kembali ke Homepage</a>
+    <script src="asuransi.js"></script>
+        <section class="purchase-form-section">
+            <h2>Formulir Pembelian Asuransi Jiwa</h2>
+            
+            <div class="form-wrapper">
+                <form id="lifeInsuranceForm" class="purchase-form">
+                    <div class="form-group">
+                        <label for="fullName">Nama Lengkap (sesuai KTP)</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Tanggal Lahir</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coverage">Besaran Pertanggungan</label>
+                        <select id="coverage" required>
+                            <option value="1000000000">Rp 1.000.000.000</option>
+                            <option value="2000000000">Rp 2.000.000.000</option>
+                            <option value="3500000000">Rp 3.500.000.000</option>
+                            <option value="5000000000">Rp 5.000.000.000</option>
+                            <option value="10000000000">Rp 10.000.000.000</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Hitung Premi</button>
+                </form>
+
+                <div class="premium-result" id="lifePremiumResult" style="display:none;">
+                    <h3>Harga Premi Anda per Bulan:</h3>
+                    <p id="lifePremiumAmount"></p>
+                    <a id="checkoutBtn" class="btn" href="checkout-jiwa.html">Checkout</a>
+                </div>
+            </div> </section>
+    </main>
+</body>
+</html>
