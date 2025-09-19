@@ -24,8 +24,14 @@
 
     <main>
         <section class="hero">
-            <h1>Temukan Asuransi Terbaik untuk Anda</h1>
-            <p>Bandingkan dan beli asuransi kesehatan, mobil, dan jiwa dengan mudah.</p>
+            <div class="hero-content">
+                <h1>Temukan Asuransi Terbaik untuk Anda</h1>
+                <p>
+                    Asuransi adalah persiapan untuk hal tak terduga.<br>
+                    Ini bukan tentang mengharapkan musibah, tetapi tentang memastikan Anda dan keluarga siap jika itu terjadi.<br>
+                    Dengan asuransi, Anda melindungi hasil jerih payah dan menjamin masa depan finansial keluarga tetap aman.
+                </p>
+            </div>
         </section>
 
         <a href="history.html" class="btn btn-secondary" id="history-btn" style="margin: 10px 0; display: inline-block;">Lihat History Pembelian</a>
@@ -148,6 +154,22 @@
                 document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
             });
         }
+
+    const authButtons = document.getElementById('auth-buttons');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userName = localStorage.getItem('userName');
+
+    if (authButtons && isLoggedIn === 'true') {
+        authButtons.innerHTML = `
+            <span class="user-name">👤 ${userName}</span>
+            <button class="btn btn-secondary" id="logout-btn">Logout</button>
+        `;
+        document.getElementById('logout-btn').onclick = function() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            location.reload();
+        };
+    }
     });
     </script>
 </body>

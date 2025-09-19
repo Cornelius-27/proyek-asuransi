@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signupForm');
     if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
+        signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Login berhasil! Selamat datang, ${user.fullName}`);
                 localStorage.setItem('loggedInUser', JSON.stringify(user));
                 localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userName', user.fullName); // Simpan nama lengkap
                 window.location.href = 'asuransi.html';
             } else {
                 alert('Email atau kata sandi yang Anda masukkan salah.');
