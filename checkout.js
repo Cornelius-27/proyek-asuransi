@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const currentPage = window.location.pathname.split('/').pop();
+    console.log('Halaman saat ini:', currentPage);
     const productInfo = productMapping[currentPage];
 
     if (!productInfo) {
@@ -14,23 +15,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const premi = localStorage.getItem(productInfo.key);
+    console.log('Premi dari localStorage:', premi); 
 
     const premiCheckoutElement = document.getElementById('premiCheckout');
     if (premi && premiCheckoutElement) {
         premiCheckoutElement.textContent = premi;
     }
 
-    const bayarBtn = document.querySelector('.btn-bayar'); 
+    const bayarBtn = document.querySelector('.btn-bayar');
     if (bayarBtn) {
         bayarBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const nama = document.getElementById('nama').value;
             const alamat = document.getElementById('alamat').value;
 
+            console.log('Nama:', nama, 'Alamat:', alamat); 
+
             if (!nama || !alamat) {
                 alert('Nama dan Alamat harus diisi.');
                 return;
             }
+
+            const metode = document.getElementById('metode').value;
 
             const history = JSON.parse(localStorage.getItem('history')) || [];
             history.push({

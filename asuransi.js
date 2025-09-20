@@ -157,8 +157,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function() {
-            const premi = document.getElementById('lifePremiumAmount').textContent;
-            localStorage.setItem('premiJiwa', premi);
+            const carPremium = document.getElementById('carPremiumAmount');
+            if (carPremium) {
+                localStorage.setItem('premiMobil', carPremium.textContent);
+            }
+            const healthPremium = document.getElementById('healthPremiumAmount');
+            if (healthPremium) {
+                localStorage.setItem('premiKesehatan', healthPremium.textContent);
+            }
+            const lifePremium = document.getElementById('lifePremiumAmount');
+            if (lifePremium) {
+                localStorage.setItem('premiJiwa', lifePremium.textContent);
+            }
         });
     }
 });
