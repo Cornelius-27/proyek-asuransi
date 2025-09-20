@@ -485,6 +485,40 @@ nav ul a {
     font-weight: 500;
 }
 
+#history-btn {
+    display: inline-block;
+    background-color: #3a85c7;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.6em 1.4em;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 2px 8px rgba(58,133,199,0.10);
+    width: auto;           /* Lebar otomatis sesuai isi */
+    min-width: 0;          /* Tidak ada batas minimal lebar */
+    text-align: center;
+    margin: 10px 0;
+}
+
+.btn-back-home {
+    display: inline-block;
+    background-color: #3a85c7;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.6em 1.4em;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 2px 8px rgba(58,133,199,0.10);
+    width: auto;
+    min-width: 0;
+    text-align: center;
+    margin: 10px 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media (max-width: 700px) {
     .history-container {
         padding: 1em 0.5em;
