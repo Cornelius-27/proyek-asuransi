@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Login berhasil! Selamat datang, ${user.fullName}`);
                 localStorage.setItem('loggedInUser', JSON.stringify(user));
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userName', user.fullName); // Simpan nama lengkap
+                localStorage.setItem('userName', user.fullName);
                 window.location.href = 'asuransi.html';
             } else {
                 alert('Email atau kata sandi yang Anda masukkan salah.');
@@ -61,28 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const carAge = currentYear - carYear; 
 
             let premiumRate = 0; 
-            
-          
             if (carAge <= 3) {
                 premiumRate = 0.025; 
-            } 
-            
-            else if (carAge > 3 && carAge <= 5) {
-                if (carPrice < 200000000) {
-                    premiumRate = 0.04; t
-                } else {
-                    premiumRate = 0.03; 
-                }
-            } 
-           
-            else if (carAge > 5) {
+            } else if (carAge > 3 && carAge <= 5) {
+                premiumRate = (carPrice < 200000000) ? 0.04 : 0.03;
+            } else if (carAge > 5) {
                 premiumRate = 0.05; 
             }
 
-          
             const premium = carPrice * premiumRate;
-            document.getElementById('carPremiumAmount').textContent = `Rp ${premium.toLocaleString('id-ID')}`;
+            const desc = `(Rate ${premiumRate*100}% x Harga Mobil Rp ${carPrice.toLocaleString('id-ID')})`;
+
+            document.getElementById('carPremiumAmount').innerHTML = 
+                `Rp ${premium.toLocaleString('id-ID')}<br><small>${desc}</small>`;
             document.getElementById('carPremiumResult').style.display = 'block';
+
+            localStorage.setItem('premiMobil', `Rp ${premium.toLocaleString('id-ID')}/tahun`);
         });
     }
 
@@ -98,15 +92,29 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const basePremium = 2000000; 
             let ageMultiplier = 0; 
-
             if (age <= 20) ageMultiplier = 0.1;
-            else if (age > 20 && age <= 35) ageMultiplier = 0.2;
-            else if (age > 35 && age <= 50) ageMultiplier = 0.25;
-            else if (age > 50) ageMultiplier = 0.4;
-            const premium = basePremium + (ageMultiplier * basePremium) + (isSmoker * 0.5 * basePremium) + (hasHypertension * 0.4 * basePremium) + (hasDiabetes * 0.5 * basePremium);
-            
-            document.getElementById('healthPremiumAmount').textContent = `Rp ${premium.toLocaleString('id-ID')}`;
+            else if (age <= 35) ageMultiplier = 0.2;
+            else if (age <= 50) ageMultiplier = 0.25;
+            else ageMultiplier = 0.4;
+
+            const premium = basePremium 
+                + (ageMultiplier * basePremium) 
+                + (isSmoker * 0.5 * basePremium) 
+                + (hasHypertension * 0.4 * basePremium) 
+                + (hasDiabetes * 0.5 * basePremium);
+
+            const desc = `Premi dasar Rp ${basePremium.toLocaleString('id-ID')} 
+                + Usia (${age} tahun, faktor ${ageMultiplier*100}%)
+                + Perokok (${isSmoker? 'Ya':'Tidak'})
+                + Hipertensi (${hasHypertension? 'Ya':'Tidak'})
+                + Diabetes (${hasDiabetes? 'Ya':'Tidak'})`;
+
+            document.getElementById('healthPremiumAmount').innerHTML = 
+                `Rp ${premium.toLocaleString('id-ID')} / tahun<br><small>${desc}</small>`;
             document.getElementById('healthPremiumResult').style.display = 'block';
+
+  
+            localStorage.setItem('premiKesehatan', `Rp ${premium.toLocaleString('id-ID')}/tahun`);
         });
     }
 
@@ -119,29 +127,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const coverage = parseFloat(document.getElementById('coverage').value); 
 
             let premiumRate = 0; 
-            
-          
             if (age <= 30) premiumRate = 0.002; 
-            else if (age > 30 && age <= 50) premiumRate = 0.004; 
-            else if (age > 50) premiumRate = 0.01; 
+            else if (age <= 50) premiumRate = 0.004; 
+            else premiumRate = 0.01; 
 
             const premium = premiumRate * coverage;
-            document.getElementById('lifePremiumAmount').textContent = `Rp ${premium.toLocaleString('id-ID')}`;
+            const desc = `(Usia ${age} tahun, Rate ${premiumRate*100}% x Pertanggungan Rp ${coverage.toLocaleString('id-ID')})`;
+
+            document.getElementById('lifePremiumAmount').innerHTML = 
+                `Rp ${premium.toLocaleString('id-ID')} / tahun<br><small>${desc}</small>`;
             document.getElementById('lifePremiumResult').style.display = 'block';
+
+            localStorage.setItem('premiJiwa', `Rp ${premium.toLocaleString('id-ID')}/tahun`);
         });
     }
 
+
     const authButtons = document.getElementById('auth-buttons');
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    if (isLoggedIn === 'true') {
-        authButtons.innerHTML = `
-            <button class="btn btn-secondary" id="logout-btn">Logout</button>
-        `;
-        document.getElementById('logout-btn').onclick = function() {
-            localStorage.removeItem('isLoggedIn');
-            location.reload();
-        };
+    if (authButtons) {
+        if (isLoggedIn === 'true') {
+            authButtons.innerHTML = `<button class="btn btn-secondary" id="logout-btn">Logout</button>`;
+            document.getElementById('logout-btn').onclick = function() {
+                localStorage.removeItem('isLoggedIn');
+                location.reload();
+            };
+        }
     }
 
     const detailBtns = document.querySelectorAll('.detail-btn');
@@ -154,21 +165,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
-            const carPremium = document.getElementById('carPremiumAmount');
-            if (carPremium) {
-                localStorage.setItem('premiMobil', carPremium.textContent);
-            }
-            const healthPremium = document.getElementById('healthPremiumAmount');
-            if (healthPremium) {
-                localStorage.setItem('premiKesehatan', healthPremium.textContent);
-            }
-            const lifePremium = document.getElementById('lifePremiumAmount');
-            if (lifePremium) {
-                localStorage.setItem('premiJiwa', lifePremium.textContent);
-            }
-        });
-    }
 });

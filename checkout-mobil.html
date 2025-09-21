@@ -33,6 +33,14 @@
             </form>
         </div>
     </main>
-    <script src="checkout.js"></script>
+   <script src="checkout.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             const premi = document.getElementById('premiCheckout').textContent;
+             if (premi && premi !== 'Premi belum ditentukan') {
+            localStorage.setItem('premiMobil', premi);
+            }
+        });
+    </script>
 </body>
 </html>
